@@ -42,8 +42,9 @@ public class Node {
     public void setPrev(Node prev) {
         this.prev = prev;
     }
+
     @Override
-public String toString() {
-    return element.toString();
-}
+    public String toString() {
+        return element.toString();
+    }
 }

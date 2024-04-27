@@ -19,8 +19,7 @@ public class LikedSongs implements StackInterface {
     private ArrayList<Song> likedSongs;
     private static final String LAST_SONG_ID_FILE = "data/last_song_id.txt";
     private int lastSongID;
-    
-    
+
     public ArrayList<Song> getLikedSongs() {
         return likedSongs;
     }
@@ -29,10 +28,11 @@ public class LikedSongs implements StackInterface {
         this.likedSongs = likedSongs;
     }
 
-        public LikedSongs() {
+    public LikedSongs() {
         likedSongs = new ArrayList<>();
         populateLikedSongsFromCSV("data/songs.csv");
     }
+
     // populates the stack from the csv that stores all of the songs
     private void populateLikedSongsFromCSV(String csvFilePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
@@ -56,7 +56,7 @@ public class LikedSongs implements StackInterface {
     }
 
     @Override
-public void push(Object newItem) {
+    public void push(Object newItem) {
         if (newItem instanceof Song) {
             likedSongs.add((Song) newItem);
         } else {
@@ -102,20 +102,22 @@ public void push(Object newItem) {
         }
         return sb.toString();
     }
-    
+
     // saves the song to the playlist with the corresponding genge
     private void saveSongToGenrePlaylistCSV(Song song, String filePath) {
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-        // Append the song information to the CSV file
-        writer.write(song.getId() + "," + song.getName() + "," + song.getArtist() + "," + song.getGenre());
-        writer.newLine();
-        System.out.println("Song added to genre playlist CSV successfully.");
-    } catch (IOException e) {
-        e.printStackTrace();
-        System.err.println("Error writing to genre playlist CSV file: " + e.getMessage());
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            // Append the song information to the CSV file
+            writer.write(song.getId() + "," + song.getName() + "," + song.getArtist() + "," + song.getGenre());
+            writer.newLine();
+            System.out.println("Song added to genre playlist CSV successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error writing to genre playlist CSV file: " + e.getMessage());
+        }
     }
-}
-    // reads the file that contains the value of the next id for the new song so there is no duplicate ids
+
+    // reads the file that contains the value of the next id for the new song so
+    // there is no duplicate ids
     private int readLastSongID() {
         try (BufferedReader reader = new BufferedReader(new FileReader(LAST_SONG_ID_FILE))) {
             String line = reader.readLine();

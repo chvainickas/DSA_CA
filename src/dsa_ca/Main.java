@@ -18,5 +18,5 @@ public class Main {
         GUI.setVisible(true);
 
     }
-    
+
 }
